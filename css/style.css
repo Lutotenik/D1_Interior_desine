@@ -1,0 +1,1111 @@
+/*
+ВАЖНО(!): Свойства перечисляются по нормальному течению потока документа, начиная из верхнего левого угла и далее, по direct, вниз или вправо.
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+СВОЙСТВА ГЛОБАЛЬНЫХ ЭЛЕМЕНТОВ + модификаторы + псевдоклассы/элементы
+(форматы текста, заголовков, ссылки, списки, кнопки и т.д.)
+*/
+
+.button {
+    display: inline-block;
+    padding: 16px 65px;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 1px solid #ffff;
+    color: #ffff;
+    transition: all 0.3s;
+}
+
+.button__text {
+    font: 400 18px/24px "Sarala", sans-serif;
+}
+
+.button:hover {
+    box-shadow: 7px 7px 3px rgba(83, 83, 83, 0.5);
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+
+.button:active,
+.button:focus {
+    background: rgb(150, 150, 150);
+    transition: all 0.3s;
+}
+
+.button_black {
+    background: rgb(0, 0, 0);
+}
+
+.font-h2 {
+    font: 400 48px/1.2 "Montserrat", sans-serif;
+}
+
+.font-h3 {
+    font: 400 26px/1 "Montserrat", sans-serif;
+}
+
+.font-h4 {
+    font: 600 20px/26px "Montserrat", sans-serif; /*ФИО в "Отзывах"*/
+}
+
+.font-description {
+    font: 400 16px/1.6 "Montserrat", sans-serif;
+}
+
+/*
+СВОЙСТВА ОСНОВНЫХ БЛОКОВ + зависимые элементы + псевдоклассы/элементы
+(main, header, footer, div, body, меню, заголовки т.д.)
+*/
+
+.general-wrapper {
+    position: relative;
+    top: -35px; /* минус высота бургер-меню */
+    left: 0;
+}
+
+/*
+    Бургер-меню - иконка при адаптивном скрытии Главного бокового меню.
+    Элемент располагаем перед всем контентом, чтобы на попал в схему построения.
+*/
+
+.burger-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    z-index: 11;
+    opacity: 0;
+}
+
+.burger-icon {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    cursor: pointer;
+}
+
+.burger-icon__item {
+    margin-top: 5px;
+    width: 30px;
+    height: 5px;
+    background: #353535;
+    border-radius: 2px;
+}
+
+/*
+    HEADER страниц
+*/
+
+.header {
+    position: relative;
+    /* фон изменяем в JS через Event-target и кнопки nav-bottom-bar */
+    background: center / cover no-repeat url("../images/header-fone.png");
+    width: 100%;
+    height: 928px; /*928px подумать над адаптивом*/
+}
+
+/* комбинир. селектор для установки свойства opacity или transform или др. через if в JS */
+.nav-top-bar.menu_visible {
+    transform: translate(0);
+}
+
+.nav-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 122px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.logo-link {
+    position: relative;
+    left: 7%;
+    width: 72px;
+    height: 50px;
+    display: block;
+}
+
+.logo-link__outside-pig {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-link__inside-pig {
+    position: absolute;
+    top: 18px;
+    left: 28px;
+    display: block;
+    width: 15px;
+    height: 14px;
+    visibility: collapse;
+}
+
+.logo-link:hover,
+.logo-link:focus {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logo-link__inside-pig.circle-visible {
+    visibility: visible;
+    transition: all 0.5s;
+}
+
+.nav-top-menu {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-right: 7%;
+}
+
+.logo {
+    margin-left: 7%;
+}
+
+.nav-top-menu__link {
+    position: relative;
+    display: inline-block;
+    margin-left: 21%;
+    font: 500 18px/100% "Montserrat", sans-serif;
+    letter-spacing: 0em;
+    color: #ffff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.nav-top-menu__link:hover {
+    transition: all 0.3s;
+    transform: scale(1.1);
+}
+
+.nav-top-menu__link::after {
+    position: absolute;
+    content: "";
+    top: 20px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffff;
+    opacity: 0;
+    transition: opacity 0.3s ease-out 0.1s;
+}
+
+.nav-top-menu__link:hover::after {
+    opacity: 1;
+    transition: opacity 0.3s ease-out 0.1s;
+}
+
+/* храненилище фоновых рисунков*/
+.header__background-pictures-container {
+    display: none;
+}
+
+/* панель линейки управления фоновыми рисунками. Кол-во линеек = кол-ву фоновых рисунков */
+.nav-bottom-bar {
+    position: absolute;
+    bottom: 56px;
+    left: 7%;
+}
+
+.nav-bottom-bar__link {
+    display: inline-block;
+    width: 66px;
+    height: 8px;
+    border-radius: 4px;
+    background: #ffff;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.2s ease-out 0.1s;
+}
+
+.nav-bottom-bar__link:hover,
+.nav-bottom-bar__link:active,
+.nav-bottom-bar__link:focus {
+    opacity: 0.5;
+    transition: opacity 0.2s ease-out 0.1s;
+}
+
+.nav-bottom-bar__link.visible {
+    /* для изменения цвета активной линейки */
+    opacity: 0.8;
+    transform: scale(1.1);
+    transition: all 0.2s ease-out 0.1s;
+}
+
+.header__head {
+    position: absolute;
+    top: 30%;
+    left: 13%;
+}
+
+.header__head > h1 {
+    max-width: 850px;
+    font: 400 60px/1.2 "Montserrat", sans-serif;
+    color: #ffff;
+    margin-bottom: 57px;
+}
+
+/*
+    MAIN
+*/
+
+.slogan {
+    box-sizing: border-box;
+    margin: 0 22%;
+    font: 400 28px/1.2 "Montserrat", sans-serif;
+    text-align: center;
+    color: #404040;
+}
+
+.slogan::before,
+.slogan::after {
+    content: "";
+    display: block;
+    width: 13%;
+    height: 1px;
+    margin: 60px auto;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* ОСНОВНЫЕ СЕРВИСЫ */
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(396px, auto)); /* 396px */
+    column-gap: 12%;
+    grid-auto-flow: row;
+    box-sizing: border-box;
+    padding: 70px 7%;
+}
+
+.service__number {
+    font: 400 144px/1 "Open Sans", sans-serif;
+    color: #f1edea;
+    margin-bottom: 36px;
+}
+
+.service__name {
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.service__description {
+    color: #6e6e6e;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ ТЕМЫ: Преимущества, удобства */
+
+.conveniences-list__name {
+    font: 400 48px/1.1 "Montserrat", sans-serif;
+    color: #404040;
+    margin-bottom: 18px;
+}
+
+.conveniences-list__description {
+    color: #6e6e6e;
+}
+
+/* СТИЛИЗАЦИЯ ПО ВИДАМ УДОБСТВ*/
+/* Дизайн и покупка в одном месте*/
+
+.design-and-buy {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    column-gap: 20%;
+    row-gap: 18px;
+    grid-auto-flow: row;
+    align-items: center;
+    padding: 9% 0 8% 7%;
+    box-sizing: border-box;
+}
+
+.design-and-buy__picture-container {
+    position: relative;
+}
+
+.design-and-buy__picture-room {
+    display: block;
+    width: 100%;
+}
+
+.design-and-buy__picture-block {
+    position: absolute;
+    top: 19%;
+    left: -25%;
+    width: 47.5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 50%);
+    grid-auto-flow: row;
+}
+
+.design-and-buy__picture-item {
+    height: 101%;
+    width: 101%;
+}
+
+/* Подбор мебели */
+
+.model-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.model-selection__convenience {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.model-selection__convenience > h2 {
+    margin-bottom: 32px;
+}
+
+.model-selection__convenience > p {
+    box-sizing: border-box;
+    padding: 0 16%;
+    margin-bottom: 26px;
+}
+
+.model-selection__picture-container {
+    position: relative;
+    width: 100%;
+    height: 887px; /* подумать над адаптивом */
+    margin-top: 331px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.model-selection__picture-background {
+    width: 100%;
+    height: 100%;
+    background: #232323;
+}
+
+.model-selection__picture-block {
+    position: absolute;
+    top: -7%;
+    left: 50%;
+    width: 70%;
+    height: 95%;
+    transform: translate(-50%);
+    padding: 0 15%;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.model-selection__show-area {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, auto));
+    column-gap: 25px;
+}
+
+.model-selection__show-block {
+    height: 838px; /* 838px подумать над адаптивом */
+    width: 100%;
+    overflow-y: scroll;
+}
+
+/* убираем скролл-бар */
+.model-selection__show-block::-webkit-scrollbar {
+    width: 0;
+}
+
+.model-selection__show-block.none-show-block {
+    display: none;
+}
+
+.model-selection__picture-item {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.model-selection__nav-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 16px 16px 0 0;
+    background: #f7f7f7;
+}
+
+.model-selection__item-bar {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    background: center / cover no-repeat
+        url("../images/control_buttons/ellipse.png");
+    opacity: 0.4;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.model-selection__item-bar:hover,
+.model-selection__item-bar:active,
+.model-selection__item-bar:focus {
+    opacity: 0.8;
+    transition: opacity 0.2s ease-out 0.1s;
+}
+
+.model-selection__item-bar.visible-item-bar {
+    opacity: 1;
+    transition: all 0.2s;
+}
+
+.model-selection__item-bar.hidden-item-bar {
+    visibility: hidden;
+    transition: all 0.2s;
+}
+
+/* Прочие удобства */
+
+.conveniences-other {
+    padding: 7% 16%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+    grid-auto-flow: row;
+    column-gap: 200px;
+    background: #ffffff;
+}
+
+.conveniences-other__name {
+    text-align: center;
+    align-items: center;
+    color: #000000;
+}
+
+.conveniences-other__description {
+    text-align: center;
+    color: #6e6e6e;
+    padding: 0 5%;
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+/* О комфорте */
+
+.about-comfort {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, auto));
+    grid-auto-flow: row;
+}
+
+.about-comfort__picture {
+    width: 100%;
+}
+
+.about-comfort__convenience {
+    padding: 12% 17%;
+    box-sizing: border-box;
+}
+
+.about-comfort__name {
+    color: #404040;
+}
+
+.about-comfort__description {
+    margin-top: 46px;
+    margin-bottom: 66px;
+    color: #6e6e6e;
+}
+
+/*
+    REVIEWS (Отзывы)
+*/
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6.5% 28%;
+    box-sizing: border-box;
+    background: #f1e9e6;
+}
+
+.reviews > h2 {
+    color: #404040;
+    margin-bottom: 8%;
+}
+
+.reviewer {
+    position: relative;
+    margin-bottom: 6%;
+}
+
+.reviewer__photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 12%;
+}
+
+.review-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+    padding: 5%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #ffff;
+}
+
+.review-wrapper_margin-left {
+    margin-left: 18%;
+}
+
+.reviewer__photo_left-end {
+    left: 86%;
+}
+
+/* рисуем треугольник слева от текста */
+.review-wrapper_margin-left::before {
+    position: absolute;
+    top: 15%;
+    right: 100%;
+    content: "";
+    border: 21.5px solid transparent;
+    border-top: 21.5px solid #ffff;
+    border-right: 21.5px solid #ffff;
+}
+
+/* рисуем треугольник справа от текста */
+.review-wrapper_margin-right::after {
+    position: absolute;
+    top: 15%;
+    left: 100%;
+    content: "";
+    border: 21.5px solid transparent;
+    border-left: 21.5px solid #ffff;
+    border-top: 21.5px solid #ffff;
+}
+
+.reviewer__name {
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.reviewer__text {
+    color: #6e6e6e;
+}
+
+/*
+    PORTFOLIO
+
+*/
+
+.portfolio {
+    padding: 7%;
+    box-sizing: border-box;
+    background-color: #ffff;
+}
+
+.portfolio-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.portfolio-head__name {
+    color: #404040;
+}
+
+/* Слайдер */
+
+/* Блок кнопок для слайдера */
+
+.button-slider__common {
+    margin-left: 33px;
+    height: 23px;
+    width: 23px;
+    appearance: none;
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+    border: none;
+}
+
+.button-slider img {
+    display: block;
+    width: 100%;
+    z-index: -1;
+}
+
+.button-slider__common:disabled {
+    cursor: default;
+}
+
+.button-slider__common:disabled img {
+    opacity: 0.5;
+}
+
+/* Окно слайдера */
+
+.portfolio-slider {
+    width: 100%;
+    margin-top: 48px;
+    overflow: hidden;
+}
+
+/* Контент портфолио */
+
+.portfolio-content {
+    width: 100%;
+    display: flex;
+    background: #ffffff;
+}
+
+.portfolio-content__item {
+    margin-right: 25px;
+    min-width: 375px; /* на сверх-малых экранах - через медиа-запрос поставить 100% */
+    flex-shrink: 0;
+}
+
+.portfolio-content__picture {
+    display: block;
+    width: 100%;
+}
+
+.portfolio-content__name {
+    margin-top: 29px;
+    margin-bottom: 16px;
+    font: 400 26px/1.2 "Montserrat", sans-serif;
+    color: #000000;
+}
+
+.portfolio-content__description {
+    font: 400 16px/32px "Montserrat", sans-serif;
+    color: #6e6e6e;
+}
+
+/*
+    ФОРМА ОБРАТНОЙ СВЯЗИ
+*/
+
+.feedback {
+    padding: 5%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feedback__head {
+    max-width: 730px;
+    margin-bottom: 67px;
+    text-align: center;
+}
+
+.input-form {
+    max-width: 515px;
+    display: flex;
+}
+
+.input-form__item {
+    display: inline-block;
+    margin-right: -2px;
+    width: 64%;
+    padding: 5%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.button_submit-form {
+    width: 36%;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    border-radius: 0px 5px 5px 0px;
+    background: #18191f;
+    border-color: #18191f;
+    cursor: pointer;
+}
+
+.button_submit-form:hover {
+    border-radius: 5px;
+}
+
+/*
+    FOOTER
+*/
+
+.footer {
+    width: 100%;
+    height: 122px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(0, 0, 0);
+    background-color: #ffff;
+}
+
+.nav-bottom-menu {
+    margin-right: 7%;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, auto));
+    grid-auto-flow: row;
+    justify-content: end;
+    gap: 2.3%;
+}
+
+.nav-bottom-menu__link {
+    position: relative;
+    display: inline-block;
+    /*    margin-left: 27px;*/
+    width: 40px;
+    height: 40px;
+    background: rgba(47, 51, 55, 0.1);
+    border-radius: 4px;
+}
+
+.nav-bottom-menu__link > img {
+    position: absolute;
+    top: 9.33px;
+    left: 9.33px;
+    width: 50%;
+    height: 50%;
+}
+
+/*
+    АДАПТИВНАЯ ВЕРСТКА. МЕДИА-ЗАПРОСЫ @MEDIA
+*/
+
+@media screen and (max-width: 1600px) {
+    /* уменьшаем отступы в "Отзывах"*/
+    .reviews {
+        padding: 6.5% 15%;
+    }
+}
+
+@media screen and (max-width: 1450px) {
+    /* уменьшаем отступы в About comfort*/
+    .about-comfort__convenience {
+        padding: 10%;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    /* изменяем схему в About comfort при переходе в колонку*/
+    .about-comfort {
+        grid-template-columns: 100%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    /* устанавливаем высоту Главного меню в %% и ширину блока "О комфорте" 100%. 2-й раз уменьшаем отступы в "Отзывах", а также "треугольнички"*/
+    .nav-top-bar {
+        position: fixed;
+        height: 6%;
+    }
+
+    .services-list {
+        padding: 7%;
+    }
+
+    .reviews {
+        padding: 6.5% 7%;
+    }
+
+    .review-wrapper_margin-left::before {
+        border: 10px solid transparent;
+        border-top: 10px solid #ffff;
+        border-right: 10px solid #ffff;
+    }
+
+    .review-wrapper_margin-right::after {
+        border: 10px solid transparent;
+        border-left: 10px solid #ffff;
+        border-top: 10px solid #ffff;
+    }
+}
+
+@media screen and (max-width: 929px) {
+    /* изменяем размеры, отступы в блоке "Выбор мебели" на 2 колонки, т.к. боковые отступы уменьшены */
+
+    .model-selection__convenience,
+    .conveniences-other,
+    .about-comfort__convenience {
+        padding: 7%;
+        box-sizing: border-box;
+    }
+
+    .model-selection__convenience > h2,
+    .about-comfort__convenience > h2 {
+        margin-bottom: 18px; /* как у общего .conveniences-list__name*/
+    }
+
+    .model-selection__convenience {
+        margin-bottom: 0;
+    }
+
+    .model-selection__convenience > p,
+    .conveniences-other__description,
+    .about-comfort__description {
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .model-selection__picture-container {
+        margin-top: 10%;
+    }
+
+    .model-selection__picture-block {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    /* оптимизируем компановку "Дизайн и покупка" */
+
+    .design-and-buy {
+        column-gap: 10%;
+    }
+
+    .design-and-buy__picture-block {
+        top: 10%;
+        left: -15%;
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    /* изменяем компановку "Дизайн и покупка" при переходе в колонку. Изменяем компановку "Отзывов": убираем "треугол.", тексты на всю ширину, вставляем фото внутрь отзывов*/
+    .design-and-buy {
+        padding: 5%;
+    }
+
+    .design-and-buy__picture-block {
+        top: 5%;
+        left: 0;
+    }
+
+    .design-and-buy__convenience,
+    .about-comfort__convenience {
+        text-align: center;
+    }
+
+    .review-wrapper_margin-left::before,
+    .review-wrapper_margin-right::after {
+        visibility: hidden;
+    }
+
+    .review-wrapper {
+        width: auto;
+        margin: 0;
+    }
+
+    .reviewer__name {
+        margin: 2.5% 20% 7%;
+    }
+
+    .reviewer__photo {
+        top: 10px;
+        left: 5%;
+        width: 15%;
+        z-index: 1;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    /* изменяем расположение Главного меню и схему - на вертикальное. Изменяем отступы и размеры в hederе. Высвечиваем бургер-меню. Изменяем размеры отступы слогана*/
+
+    .header {
+        height: 670px;
+    }
+
+    .header__head {
+        top: 15%;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header__head > h1 {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .nav-top-bar {
+        position: fixed;
+        width: 50%;
+        left: 0;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.6);
+        transform: translate(-100%);
+        transition: all 0.5s ease;
+    }
+
+    .nav-top-menu {
+        margin-top: 100px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .nav-top-menu__link {
+        margin-bottom: 30px;
+        margin-left: 0;
+    }
+
+    .burger-container {
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+
+    .slogan {
+        margin: 0 5%;
+    }
+
+    .slogan::before,
+    .slogan::after {
+        margin: 40px auto;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    /* Ввиду того, что некот. э-ты не помещаются на экран и возникает просвет справа: 1) изменяем размеры шрифта заголовка h1 в хедере; 2) уменьшаем минимальный ширины эл-в гридов/флексов, где это требуется*; 3) уменьш.размер шрифта и интервал в кнопках*/
+
+    .button,
+    .button_submit-form {
+        padding: 16px;
+    }
+
+    .button__text {
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .header__head > h1 {
+        font-size: 40px;
+    }
+
+    .font-h2,
+    .conveniences-list__name {
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    .font-h3,
+    .slogan,
+    .portfolio-content__name {
+        font-size: 20px;
+    }
+
+    .font-description,
+    .portfolio-content__description {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .services-list,
+    .design-and-buy,
+    .model-selection__show-area,
+    .conveniences-other,
+    .about-comfort {
+        /*grid-template-columns: repeat(auto-fit, minmax(200px, auto));*/
+        /*grid-template-columns: 100%;*/
+        grid-template-columns: repeat(auto-fit, 100%);
+    }
+
+    .portfolio-content__item {
+        min-width: 200px;
+    }
+
+    .design-and-buy {
+        padding: 7%;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    /* Уменьш. паддинг у конпки "Заказать дизайн". Еще раз уменьш. размеры шрифтов. Подгоняем ширину Главного меню. Изменяем пропорции в форме е-майл */
+    .nav-top-bar {
+        width: 70%;
+    }
+
+    .nav-top-menu__link {
+        font-size: 15px;
+    }
+
+    .header__head > h1,
+    .font-h2,
+    .conveniences-list__name {
+        font-size: 20px;
+    }
+
+    .font-h3,
+    .slogan,
+    .portfolio-content__name {
+        font-size: 15px;
+    }
+
+    .font-h4 {
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .font-description,
+    .portfolio-content__description {
+        font-size: 10px;
+    }
+
+    .model-selection__picture-container {
+        height: 450px; /* подумать над адаптивом */
+        margin-top: 20px;
+    }
+
+    .model-selection__picture-block {
+        position: absolute;
+        top: -3%;
+        padding: 0 7%;
+    }
+
+    .model-selection__show-block {
+        height: 400px; /* подумать над адаптивом */
+    }
+
+    .input-form__item,
+    .button_submit-form {
+        width: 50%;
+    }
+
+    .feedback__head {
+        margin-bottom: 40px;
+    }
+
+    .portfolio-slider {
+        margin-top: 40px;
+    }
+}
